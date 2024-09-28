@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use App\Models\User;
 use App\Http\Controllers\API\NotificationController;
+use App\Http\Controllers\API\PaymentController;
 use App\Http\Controllers\Auth\VerificationController;
 
 
@@ -47,4 +48,13 @@ Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'
                 // ->middleware('signed')
                 ->name('verification.verify');
         });
+
+
+
+
+Route::get('/index', [PaymentController::class, 'index'])->name('index');
+Route::post('/checkout/{auctionID}/{bidderID}', [PaymentController::class, 'checkout'])->name('checkout');
+Route::get('/success/{auctionID}/{bidderID}', [PaymentController::class, 'success'])->name('success');
+        
+        
         

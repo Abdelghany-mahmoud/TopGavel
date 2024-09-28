@@ -96,6 +96,14 @@ public function store(Request $request, $auctionId)
         return response()->json($validation->messages(), 400);
     }
 
+    
+    // check if the customer is bidding for the first time or not for the Insurance payment 
+    // $isFound=Bid::where('auction_id', $auction->id)->find($customer->id);
+    // if($isFound){
+    //     return route('checkout', ['auctionID' => $auction->id, 'bidderID' => $customer->id]);
+    // }
+
+
     // Create the new bid
     $data = $request->all();
     $data['customer_id'] = $customer->id;
