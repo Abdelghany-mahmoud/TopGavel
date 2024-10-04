@@ -68,14 +68,14 @@
 
 
   <!-- Opening Auctions Section -->
-  <div class="auctions">
-    <h1>Auction Listings</h1>
+  <div class="auctions container">
+    <h2>Auction Listings</h2>
     <div *ngIf="auctions.length > 0; else noAuctions">
       <div class="auction-items">
         <div *ngFor="let auction of auctions" class="auction-item">
-          <img [src]="auction.item_media" alt="{{ auction.item_name }}">
+          <img [src]="auction.item_media" [routerLink]="['/auction', auction.auction_id]" alt="{{ auction.item_name }}">
           <div class="auction-info">
-            <p class="category-name">{{ auction.auction_id }}</p>
+            <!-- <p class="category-name">{{ auction.auction_id }}</p> -->
             <p class="item-description">
               <span class="item-name">{{ auction.item_name }}</span>
               <br>
@@ -88,16 +88,15 @@
             <p class="auction-end-date">{{ auction.auction_end_time | date:'short' }}</p>
       
             <p class="auction-status" [ngClass]="{'opened': checkAuctionStatus(auction.auction_end_time) === 'opened', 'closed': checkAuctionStatus(auction.auction_end_time) === 'closed'}">
-              Status: {{ checkAuctionStatus(auction.auction_end_time) }}
+              {{ checkAuctionStatus(auction.auction_end_time) }}
             </p>
       
             <div class="bid-btn" *ngIf="checkAuctionStatus(auction.auction_end_time) === 'opened'">
-              <button routerLink="/payment-verification">Place Bid Now</button>
+              <button routerLink="/payment-verification">Bid Now</button>
             </div>
-      
-            <div class="auction-detail-link">
+            <!-- <div class="auction-detail-link">
               <a [routerLink]="['/auction', auction.auction_id]">View Auction</a>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

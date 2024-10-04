@@ -8,7 +8,7 @@ import { AuctionService } from '../../services/auction.service';
 @Component({
   selector: 'app-auctions',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule], // أزل RouterLink
+  imports: [FormsModule, ReactiveFormsModule, CommonModule], 
   templateUrl: './auctions.component.html',
   styleUrls: ['./auctions.component.css']
 })
@@ -16,7 +16,7 @@ export class AuctionsComponent implements OnInit {
   auctionForm: FormGroup;
 
   auctions: any[] = [];
-  selectedAuctionId: number | null = null; // Property to track selected auction ID
+  selectedAuctionId: number | null = null; 
 
 
   constructor(private fb: FormBuilder, private auctionService: AuctionService, private router: Router) { // أضف Router هنا
@@ -60,14 +60,14 @@ export class AuctionsComponent implements OnInit {
     if (file) {
       const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
       if (!allowedTypes.includes(file.type)) {
-        alert('يرجى تحميل صورة بصيغة JPEG أو PNG أو GIF فقط.');
+        alert('Please upload an image in JPEG, PNG, or GIF format only.');
         this.auctionForm.patchValue({
-          item_media: null // إعادة تعيين القيمة إذا كان النوع غير مسموح
+          item_media: null 
         });
         return;
       }
       
-      // يتم تحديث قيمة item_media لتكون الملف نفسه بدلاً من بيانات الصورة
+      
       this.auctionForm.patchValue({
         item_media: file
       });
@@ -79,7 +79,6 @@ export class AuctionsComponent implements OnInit {
 
     // Append form values to FormData
     Object.keys(this.auctionForm.value).forEach(key => {
-      // إذا كانت القيمة هي ملف، أضفها مباشرة
       if (key === 'item_media') {
         formData.append(key, this.auctionForm.get('item_media')?.value);
       } else {

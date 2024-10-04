@@ -104,6 +104,10 @@ button[type="submit"]:hover {
     color: var(--dark-color);
     display: inline;
 }
+    
+button[type="submit"] {
+    margin-bottom: 50px;
+}
 /* Responsive design */
 @media (max-width: 600px) {
     .container.add-auction-form {

@@ -1,5 +1,5 @@
 /* Opening Auction Styles */
-.auctions {
+/* .auctions {
     font-family: 'Arial', sans-serif;
     padding: 20px;
     text-align: center;
@@ -85,11 +85,11 @@
   }
   
   .auction-status.opened {
-    color: #28a745; /* لون الحالة المفتوحة (أخضر) */
+    color: #28a745;  
   }
   
   .auction-status.closed {
-    color: #dc3545; /* لون الحالة المغلقة (أحمر) */
+    color: #dc3545; 
   }
   
   .bid-btn {
@@ -111,4 +111,210 @@
   .bid-btn button:hover {
     background-color: #0056b3;
   }
-  
+   */
+
+   
+/* Style for the hero section */
+.hero {
+  height: 50vh; 
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  background-color: var(--accent-color); 
+}
+
+/* Style for the search container */
+.search-bar {
+    width: 70%;
+    border-radius: 10px;
+    margin-top: 50px; 
+    z-index: 99;
+  } 
+  .search-title {
+    text-align: center;
+  }
+  .search-title h1 {
+    margin-top: 30px;
+    font-weight: 500;
+    color: var(--background-color);
+  }
+  .search-container {
+    margin: auto;
+    display: flex;
+    border: 1px solid #b1b1b1;
+    border-radius: 5px;
+    overflow: hidden;
+    width: 600px; 
+    z-index: 99;
+  }
+  .search-container .map {
+    color: var(--accent-color);
+    line-height: 30px;
+  }
+  .search-container i {
+    padding: 10px;
+    font-size: 20px;
+    color: #777;
+    background-color: white;
+  }
+
+/* Sort Styles */
+.sort-dropdown {
+  display: flex;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  justify-content: flex-end;
+}
+
+.sort-dropdown label {
+  margin-right: 10px;
+  font-weight: bold;
+  color: gray;
+}
+
+#sort-options {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  background-color: #fff;
+  outline: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#sort-options option {
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Categories Styles */
+.categories {
+  margin-top: 50px;
+}
+.categories-dashboard {
+  display: flex;
+  justify-content: space-between;
+}
+.categories-dashboard .category {
+  width: 170px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  background-color: #ededed;
+  border-radius: 5px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 50px;
+  transition: all 0.5s ease-out;
+}
+.categories-dashboard .category:not(:first-child) {
+  margin-left: 10px;
+}
+.categories-dashboard .category img {
+  width: 80px;
+}
+.category:hover {
+  transform: scale(1.02);
+}
+.category img {
+  width: 35px !important;
+  margin-right: 10px;
+}
+.bid-btn button {
+  background: var(--btn-color);
+  color: var(--background-color);
+  border-radius: 0px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: auto;
+}
+.bid-btn button:hover {
+background-color: var(--dark-color);
+}
+/* Auction Styles */
+.auctions-dashboard {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+/* Sidebar styles */
+.sidebar {
+  flex: 1;
+  background-color: #9b9b9b;
+  padding: 20px;
+  max-width: 250px; 
+  border-radius: 5px;
+}
+.auctions {
+  flex: 3;
+  margin-left: 20px;
+}
+.auction-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+.category-title {
+  margin-bottom: 20px;
+}
+.auction-item {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  position: relative;
+  padding-bottom: 20px;
+}
+.auction-item:hover {
+transform: scale(1.02);
+}
+.auction-item img {
+width: 100%;
+height: auto;
+border-radius: 8px;
+cursor: pointer;
+}
+.auction-info {
+padding: 10px 0;
+}
+.item-description {
+display: flex;
+justify-content: space-between;
+}
+
+.auction-time-out {
+  position: absolute;
+  top: 201px;
+  padding: 7px;
+  background-color: var(--accent-color);
+  border-top-right-radius: 5px;
+  color: var(--background-color);
+  width: 70%;
+}
+.auctions i {
+  color: var(--accent-color);
+  margin-right: 5px;
+}
+.category-name {
+  color: var(--dark-color);
+  margin-top: 0px;
+}
+.auctions .item-location {
+  color: gray;
+}
+.auctions .auction-end-date {
+  color: var(--dark-color);
+}
+.item-price {
+  color: var(--accent-color);
+}

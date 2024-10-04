@@ -1,11 +1,8 @@
+<div class="hero-title">
+  <h2 class=" container form-title">Thank you for participating in <span class="gavel">T</span>OPGAVEL's online auctions<br> Join the Auction Revolution, Showcase Your Exceptional Items and Connect with Enthusiastic Bidders</h2> 
+</div>
 
-<br><br><br>
-
-<br>
-
-
-
-<form [formGroup]="auctionForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+<form [formGroup]="auctionForm" class="container" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
   <label for="category_id">Category ID</label>
   <input id="category_id" formControlName="category_id" type="number" required>
   <div *ngIf="auctionForm.get('category_id')?.invalid && (auctionForm.get('category_id')?.touched || auctionForm.get('category_id')?.dirty)">
