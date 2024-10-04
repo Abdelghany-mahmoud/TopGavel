@@ -17,7 +17,7 @@ export class AddAuctionComponent {
   selectedFiles: File[] = [];
 
 
-  constructor(private fb: FormBuilder, private auctionService: AuctionService) {
+  constructor(private fb: FormBuilder, private auctionService: AuctionService, private router: Router) {
     this.auctionForm = this.fb.group({
       category_id: ['', Validators.required],
       item_name: ['', Validators.required],
@@ -33,44 +33,27 @@ export class AddAuctionComponent {
 
   onFileChange(event: any) {
     this.selectedFiles = Array.from(event.target.files);
-    // const file = event.target.files[0]; // Get the first file from the file input
-    // if (file) {
-    //   const allowedTypes = ['image/jpeg', 'image/png', 'image/gif']; // Define allowed file types
-    //   if (!allowedTypes.includes(file.type)) {
-    //     alert('Please upload an image in JPEG, PNG, or GIF format only.'); // Alert if the file type is not allowed
-    //     this.auctionForm.patchValue({
-    //       item_media: null // Reset value if type is not allowed
-    //     });
-    //     return; // Exit the method
-    //   }
-
-    //   // Update item_media to be the file itself instead of image data
-    //   this.auctionForm.patchValue({
-    //     item_media: file // Set item_media to the selected file
-    //   });
-    // }
   }
 
 
   onSubmit() {
     if (this.auctionForm.valid) {
       const formData = new FormData();
-      // const formData = this.auctionForm.value;
       Object.keys(this.auctionForm.value).forEach(key => {
         const value = this.auctionForm.get(key)?.value;
         if (key === 'item_media') {
           if (this.selectedFiles.length > 0) {
             this.selectedFiles.forEach(file => {
-              formData.append('item_media[]', file, file.name); // Append files
+              formData.append('item_media[]', file, file.name);
             });
           }
         } else {
-          formData.append(key, value || ''); // Append other form values
+          formData.append(key, value || '');
         }
       });
       this.auctionService.createAuction(formData).subscribe({
         next: (response) => {
-          console.log(response);
+          this.router.navigate(['/']);
           this.auctionForm.reset();
         },
         error: (error) => {
@@ -78,26 +61,5 @@ export class AddAuctionComponent {
         }
       });
     }
-    console.log(this.auctionForm.valid);
-
-    // const formData = new FormData();
-    // Append form values to FormData
-    // Object.keys(this.auctionForm.value).forEach(key => {
-    //   const value = this.auctionForm.get(key)?.value;
-    //   if (key === 'item_media') {
-    //     if (value) {
-    //       Data.append(key, value);
-    //       console.log('Appending file:', value);
-    //     }
-    //   } else {
-    //     Data.append(key, value || '');
-    //     console.log(`Appending ${key}:`, value);
-    //   }
-    // });
-
-    // // Show contents of FormData (for verification only, don't use in production)
-    // formData.forEach((value, key) => {
-    //   console.log(`${key}:`, value);
-    // });
   }
 }

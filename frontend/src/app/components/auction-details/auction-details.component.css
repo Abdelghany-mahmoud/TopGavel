@@ -1,58 +1,46 @@
 .auction-container {
-  max-width: 800px; /* تعيين عرض أقصى للحاوية */
-  margin: 20px auto; /* توسيط الحاوية مع هوامش تلقائية */
-  padding: 20px; /* إضافة حشوة داخلية */
-  background-color: #ffffff; /* خلفية بيضاء */
-  border-radius: 10px; /* زوايا مدورة */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* ظل ناعم لإضافة العمق */
-  transition: transform 0.3s; /* تأثير انتقال لتحريك الحاوية */
+  display: flex;
+  gap: 50px;
+  width: 90%;
+  margin: auto;
+  margin-top: 150px;
+}
+.auction-status {
+  color: var(--success-color);
+}
+.auction-container h2 {
+  margin-top: 0px;
+}
+.image-section {
+  width: 50%;
 }
 
-.auction-container:hover {
-  transform: translateY(-5px); /* تحريك الحاوية لأعلى عند التمرير */
+.main-image {
+  width: 100%;
+  height: auto;
+  border: 2px solid #ccc;
 }
 
-.auction-title {
-  font-size: 28px; /* حجم خط كبير للعنوان */
-  color: #2c3e50; /* لون داكن للعنوان */
-  margin-bottom: 15px; /* تباعد أسفل العنوان */
-  text-align: center; /* توسيط العنوان */
+.image-gallery {
+  display: flex;
 }
 
-.auction-image {
-  width: 25%; /* عرض الصورة 100% */
-  height: auto; /* الحفاظ على نسبة العرض إلى الارتفاع */
-  border-radius: 8px; /* زوايا مدورة للصورة */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15); /* ظل للصورة */
-  margin-bottom: 15px; /* تباعد أسفل الصورة */
+.main-image {
+  margin-right: 10px;
 }
 
-.auction-details {
-  border-top: 2px solid #e74c3c; /* خط علوي ملون */
-  padding-top: 15px; /* حشوة أعلى */
-  margin-top: 15px; /* تباعد أعلى */
+.thumbnails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.auction-details p {
-  font-size: 16px; /* حجم خط للمعلومات */
-  color: #34495e; /* لون رمادي للمعلومات */
-  margin: 8px 0; /* تباعد عمودي بين المعلومات */
+.thumbnail-image {
+  cursor: pointer;
+  border: 1px solid #ddd;
+  padding: 2px;
 }
 
-.creator-info {
-  margin-top: 20px; /* تباعد أعلى */
-  border-top: 2px solid #3498db; 
-  padding-top: 15px; 
-}
-
-.creator-info h4 {
-  color: #2980b9; 
-  font-size: 20px; 
-}
-
-.loading-message {
-  text-align: center; 
-  font-size: 18px; /* حجم خط للرسالة */
-  color: #777; /* لون رمادي للرسالة */
-  margin-top: 30px; /* تباعد أعلى */
+.thumbnail-image:hover {
+  border: 1px solid var(--btn-color);
 }

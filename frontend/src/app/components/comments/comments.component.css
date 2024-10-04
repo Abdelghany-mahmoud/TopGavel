@@ -1,84 +1,100 @@
 .comments-section {
-    max-width: 800px; /* Maximum width of comments section */
-    margin: auto; /* Center the section */
-    padding: 20px; /* Padding for inner content */
-    background-color: #f9f9f9; /* Light background color */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    position: absolute;
+    right: 170px;
+    top: 600px;
+    margin-top: 30px;
 }
 
 .comments-title {
-    font-size: 24px; /* Larger font size for title */
-    color: #333; /* Dark text color */
-    margin-bottom: 20px; /* Spacing below title */
+    font-size: 24px; 
+    color: #333; 
+    margin-bottom: 20px; 
 }
 
 .comments-list {
-    list-style-type: none; /* Remove default list style */
-    padding: 0; /* Remove padding */
+    list-style-type: none; 
+    padding: 0; 
 }
 
 .comment-item {
-    background-color: #fff; /* White background for comments */
-    margin-bottom: 15px; /* Space between comments */
-    padding: 15px; /* Padding for each comment */
-    border-radius: 6px; /* Rounded corners for comment items */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Subtle shadow for comments */
+    background-color: #fff; 
+    margin-bottom: 15px; 
+    padding: 15px; 
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); 
 }
 
 .comment-author {
-    font-weight: bold; /* Bold for author name */
-    color: #007bff; /* Blue color for author name */
+    font-weight: bold; 
+    color: #007bff; 
 }
-
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -50px;
+}
+.comments-section img {
+    border-radius: 50%;
+    border: 1px solid;
+    margin-right: 5px;
+}
+.creator-name {
+    margin-right: 10px;
+}
+.comments-section .btns {
+    width: 200px;
+    margin: auto;
+    margin-top: -30px;
+    margin-bottom: 20px;
+}
+.comments-section button {
+    font-size: 13px;
+    color: var(--dark-color);
+    text-decoration: underline;
+}
 .comment-content {
-    margin-top: 5px; /* Space above comment content */
-    color: #555; /* Dark gray for comment text */
+    color: #555; 
+    background-color: #dadada;
+    padding: 10px 30px; 
+    color: var(--text-color);
+    border-radius: 15px;
+
 }
 
 .no-comments {
-    text-align: center; /* Centered text for no comments */
-    color: #888; /* Gray color for no comments message */
-    font-size: 16px; /* Slightly larger font size */
+    text-align: center; 
+    color: #888;
+    font-size: 16px; 
 }
 
 .comment-form {
-    margin-top: 20px; /* Space above form */
+    margin-top: 20px; 
 }
 
-.comment-form textarea {
-    width: 100%; /* Full width for textarea */
-    height: 100px; /* Height of textarea */
-    padding: 10px; /* Padding inside textarea */
-    border: 1px solid #ccc; /* Border style */
-    border-radius: 4px; /* Rounded corners */
-    resize: none; /* Disable resizing */
-    font-size: 16px; /* Font size */
-    margin-bottom: 10px; /* Space below textarea */
+textarea {
+    outline: none;
+    width: 300px;
+    height: 50px;
+    border-radius: 15px;
+    border: none;
+    background-color: #dadada;
+    padding: 10px; 
+    color: var(--text-color);
 }
-
-.submit-button {
-    background-color: #007bff; /* Blue background for button */
-    color: white; /* White text color */
-    padding: 10px 20px; /* Padding for button */
-    border: none; /* No border */
-    border-radius: 4px; /* Rounded corners for button */
-    cursor: pointer; /* Pointer cursor on hover */
-    font-size: 16px; /* Font size */
-    transition: background-color 0.3s; /* Transition effect for background */
-}
-
-.submit-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+form button:hover {
+    color: var(--btn-color);
 }
 
 /* Media query for responsive design */
 @media (max-width: 768px) {
     .comments-section {
-        padding: 15px; /* Adjust padding on smaller screens */
+        padding: 15px; 
     }
 
     .comment-form textarea {
-        height: 80px; /* Reduce height on smaller screens */
+        height: 80px; 
     }
 }
+
+

@@ -1,10 +1,11 @@
-<br>
-
+<!-- 
 <div class="auction-container" *ngIf="auction">
+ <div>
   <h2 class="auction-title">{{ auction.item_name }}</h2>
   <div *ngFor="let image of images">
-    <img [src]="'http://localhost:8000/uploads/'+image" alt="Item Image" class="auction-image" *ngIf="image" width="100px">
+    <img [src]="'http://localhost:8000/uploads/'+image" alt="Item Image" class="auction-image" *ngIf="image" width="500">
   </div>
+ </div>
   <div class="auction-details">
     <p><strong>Category:</strong> {{ auction.item_category }}</p>
     <p><strong>Description:</strong> {{ auction.item_description }}</p>
@@ -19,14 +20,61 @@
     }">
       Status: {{ checkAuctionStatus(auction.auction_end_time) }}
     </p>
-
-
     <p><strong>Country:</strong> {{ auction.item_country }}</p>
+    <div *ngIf="auction.creator" class="creator-info">
+      <h4>Created by:</h4>
+      <p>{{ auction.creator.name }}</p>
+    </div>
+
   </div>
 
-  <div *ngIf="auction.creator" class="creator-info">
-    <h4>Created by:</h4>
-    <p>{{ auction.creator.name }}</p>
+</div>
+
+<div *ngIf="!auction" class="loading-message">
+  <p>Loading auction details...</p>
+</div> -->
+<div class="auction-container" *ngIf="auction">
+  <div class="image-gallery">
+    <!-- Main Image Display -->
+    <div class="main-image">
+      <img [src]="'http://localhost:8000/uploads/'+selectedImage" alt="Main Item Image" class="auction-image" width="500">
+    </div>
+
+    <!-- Thumbnail Images Display -->
+    <div class="thumbnails">
+      <div *ngFor="let image of images">
+        <img 
+          [src]="'http://localhost:8000/uploads/'+image" 
+          alt="Thumbnail Image" 
+          class="thumbnail-image" 
+          width="100"
+          (click)="setMainImage(image)"> 
+      </div>
+    </div>
+  </div>
+
+  <div class="auction-details">
+    <h2 class="auction-title">{{ auction.item_name }}</h2>
+    <p><strong>Category</strong> {{ auction.item_category }}</p>
+    <p><strong>Description</strong> {{ auction.item_description }}</p>
+    <p><strong>Starting Bid</strong> {{ auction.starting_bid }} USD</p>
+    <p><strong>Bid Increment</strong> {{ auction.bid_increment }} USD</p>
+    <p><strong>Start Time</strong> {{ auction.auction_start_time | date: 'short' }}</p>
+    <p><strong>End Time</strong> {{ auction.auction_end_time | date: 'short' }}</p>
+
+    <p class="auction-status" [ngClass]="{
+      'opened': checkAuctionStatus(auction.auction_end_time) === 'opened', 
+      'closed': checkAuctionStatus(auction.auction_end_time) === 'closed'
+    }">
+      Status {{ checkAuctionStatus(auction.auction_end_time) }}
+    </p>
+
+    <p><strong>Country</strong> {{ auction.item_country }}</p>
+    
+    <div *ngIf="auction.creator" class="creator-info">
+      <p><strong>Seller</strong></p>
+      <p>{{ auction.creator.name }}</p>
+    </div>
   </div>
 </div>
 

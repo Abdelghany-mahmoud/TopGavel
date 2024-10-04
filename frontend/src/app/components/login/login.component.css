@@ -1,3 +1,6 @@
+h1 {
+  color: black;
+}
 .error {
   color: #d8000c; 
   background-color: #ffbaba; 
@@ -30,7 +33,7 @@
 .login-form-btn {
   width: 100%;
   padding: 12px;
-  background-color: #007bff;
+  background-color: var(--btn-color);
   border: none;
   color: white;
   font-size: 16px;
@@ -40,7 +43,7 @@
 }
 
 .login-form-btn:hover:not([disabled]) {
-  background-color: #0056b3;
+  background-color: var(--dark-color);
 }
 
 .login-form-btn[disabled] {
@@ -49,7 +52,7 @@
 }
 
 .forgot a {
-  color: #007bff;
+  color: var(--btn-color);
   text-decoration: none;
   font-size: 14px;
 }
@@ -64,7 +67,7 @@
 }
 
 .join a {
-  color: #007bff;
+  color: var(--btn-color);
   text-decoration: none;
   font-weight: bold;
 }

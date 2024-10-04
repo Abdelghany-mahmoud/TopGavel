@@ -73,9 +73,11 @@
     <div *ngIf="auctions.length > 0; else noAuctions">
       <div class="auction-items">
         <div *ngFor="let auction of auctions" class="auction-item">
-          <img [src]="auction.item_media" [routerLink]="['/auction', auction.auction_id]" alt="{{ auction.item_name }}">
+
+    <div *ngIf="images && images.length > 1">
+          <img [src]="'http://localhost:8000/uploads/' + images[2]" [routerLink]="['/auction', auction.auction_id]" alt="{{ auction.item_name }}">
+          </div>          
           <div class="auction-info">
-            <!-- <p class="category-name">{{ auction.auction_id }}</p> -->
             <p class="item-description">
               <span class="item-name">{{ auction.item_name }}</span>
               <br>
@@ -94,9 +96,7 @@
             <div class="bid-btn" *ngIf="checkAuctionStatus(auction.auction_end_time) === 'opened'">
               <button routerLink="/payment-verification">Bid Now</button>
             </div>
-            <!-- <div class="auction-detail-link">
-              <a [routerLink]="['/auction', auction.auction_id]">View Auction</a>
-            </div> -->
+
           </div>
         </div>
       </div>

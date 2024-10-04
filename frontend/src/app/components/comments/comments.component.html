@@ -1,14 +1,19 @@
-<div>
-  <h3>Comments</h3>
-
-  <div *ngFor="let comment of comments">
-    <p><strong>{{ comment.creator_name }}</strong>: {{ comment.content }}</p>
-    <button (click)="editComment(comment)">Edit</button>
-    <button (click)="deleteComment(comment.comment_id)">Delete</button>
+<div class="comments-section">
+  <div *ngFor="let comment of comments" >
+    <div class="content">
+      <p class="creator-name"><strong>{{ comment.creator_name }}</strong></p> 
+      <!-- <img src="assets/images/user.jpeg" width="30" alt=""> -->
+      <p class="comment-content">{{ comment.content }}</p>
+    </div>
+    <br>
+    <div class="btns">
+      <button (click)="editComment(comment)">Edit</button>
+      <button (click)="deleteComment(comment.comment_id)">Delete</button>
+    </div>
   </div>
-
+  
   <form (ngSubmit)="submitComment()">
-    <textarea [(ngModel)]="newComment.comment_text" name="commentText" required></textarea>
-    <button type="submit">{{ editMode ? 'Update' : 'Submit' }}</button>
+    <textarea [(ngModel)]="newComment.comment_text" placeholder="Write a comment ..."  name="commentText" required></textarea>
+    <button type="submit">{{ editMode ? 'Update' : 'Send' }}</button>
   </form>
 </div>

@@ -1,20 +1,9 @@
-/* .registeration-hero {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  background-image: url(../../assets/images/background2.jpeg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100%;
-  height: 100%;
-  position: relative;
-} */
+
 h1 {
   margin-top: 0px;
   padding-top: 30px;
 }
  h1 a {
-  /* color: var(--background-color); */
   color: black;
  }
   .register-title {
@@ -42,7 +31,7 @@ h1 {
   font-size: 16px;
 }
 .register-form-btn:hover:not([disabled]) {
-  background-color: #218838;
+  background-color: var(--dark-color);
 }
 
 .register-form-btn[disabled] {

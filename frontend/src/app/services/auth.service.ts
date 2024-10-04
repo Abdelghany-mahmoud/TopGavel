@@ -70,6 +70,12 @@ export class AuthService {
     }
   }
 
+
+
+  verifyEmail(email: string, otp: string): Observable<any> {
+    return this.http.post(`${this.Url}/email_verify`, { email, otp });
+  }
+
   is_email_verified(): boolean {
     const userJson = localStorage.getItem('user');
     if (userJson){

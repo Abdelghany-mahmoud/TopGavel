@@ -20,7 +20,7 @@
   <form class="bid-form" (ngSubmit)="placeBid()">
     <label for="bidAmount" class="bid-label">Your Bid:</label>
     <input type="number" id="bidAmount" [(ngModel)]="bidAmount" name="bidAmount" [min]="auction.starting_bid" required class="bid-input">
-    <button type="submit" class="submit-bid-button">Submit Bid</button>
+    <button type="submit" class="submit-bid-button">Place Bid</button>
   </form>
 </div>
 
