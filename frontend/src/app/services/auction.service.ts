@@ -225,4 +225,16 @@ export class AuctionService {
     return this.http.post(`${this.apiUrl}/${id}/reject`, {}, { headers })
       .pipe(catchError(this.handleError));
   }
+
+ 
+  searchByCategory(categoryId: number, page: number = 1, perPage: number = 10): Observable<PaginatedAuctions> {
+    let httpParams = new HttpParams()
+      .set('category_id', categoryId.toString())
+      .set('page', page.toString())
+      .set('per_page', perPage.toString());
+
+    return this.http.get<PaginatedAuctions>(`${this.apiUrl}/search-by-category`, { params: httpParams })
+      .pipe(catchError(this.handleError));
+  }
+  
 }

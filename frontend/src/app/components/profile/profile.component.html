@@ -1,0 +1,159 @@
+<div class="profile-container" *ngIf="user">
+    <h2>User Profile</h2>
+  
+    <!-- Success and Error Messages -->
+    <div *ngIf="message" class="alert alert-success">
+      {{ message }}
+    </div>
+    <div *ngIf="error" class="alert alert-danger">
+      {{ error }}
+    </div>
+  
+    <!-- Edit Profile Form -->
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" *ngIf="isEditing">
+      <!-- Profile Image Upload -->
+      <div class="form-group">
+        <label for="profile_picture">Profile Image</label>
+        <input
+          id="profile_picture"
+          type="file"
+          (change)="onFileSelect($event)"
+          class="form-control"
+          accept="image/*"
+        />
+        <!-- Preview Selected Image -->
+        <div *ngIf="profileImageUrl" class="mt-2">
+          <img [src]="profileImageUrl" alt="Profile Image Preview" class="img-thumbnail" width="150" />
+        </div>
+      </div>
+  
+      <!-- Name Field -->
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input
+          id="name"
+          formControlName="name"
+          class="form-control"
+          type="text"
+          placeholder="Enter your name"
+        />
+        <div *ngIf="profileForm.get('name')?.invalid && profileForm.get('name')?.touched" class="text-danger">
+          Name is required and must not exceed 255 characters.
+        </div>
+      </div>
+  
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          formControlName="email"
+          class="form-control"
+          type="email"
+          placeholder="Enter your email"
+        />
+        <div *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched" class="text-danger">
+          The email is invalid or already exists.
+        </div>
+      </div>
+  
+      <!-- Phone Number Field -->
+      <div class="form-group">
+        <label for="phone_number">Phone Number</label>
+        <input
+          id="phone_number"
+          formControlName="phone_number"
+          class="form-control"
+          type="text"
+          placeholder="Enter your phone number"
+        />
+        <div *ngIf="profileForm.get('phone_number')?.invalid && profileForm.get('phone_number')?.touched" class="text-danger">
+          Phone number is required.
+        </div>
+      </div>
+  
+      <!-- Address Field -->
+      <div class="form-group">
+        <label for="address">Address</label>
+        <input
+          id="address"
+          formControlName="address"
+          class="form-control"
+          type="text"
+          placeholder="Enter your address"
+        />
+        <div *ngIf="profileForm.get('address')?.invalid && profileForm.get('address')?.touched" class="text-danger">
+          Address is required.
+        </div>
+      </div>
+  
+      <!-- Password Fields (Optional) -->
+      <div class="form-group">
+        <label for="password">New Password</label>
+        <input
+          id="password"
+          formControlName="password"
+          class="form-control"
+          type="password"
+          placeholder="Enter new password"
+        />
+        <div *ngIf="profileForm.get('password')?.invalid && profileForm.get('password')?.touched" class="text-danger">
+          Password must be at least 8 characters long and contain an uppercase letter, a lowercase letter, a number, and a special character.
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label for="password_confirmation">Confirm Password</label>
+        <input
+          id="password_confirmation"
+          formControlName="password_confirmation"
+          class="form-control"
+          type="password"
+          placeholder="Confirm your password"
+        />
+        <div *ngIf="profileForm.hasError('mismatch') && profileForm.get('password_confirmation')?.touched" class="text-danger">
+          Passwords do not match.
+        </div>
+      </div>
+  
+      <!-- Form Buttons -->
+      <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid">Save Changes</button>
+      <button type="button" class="btn btn-secondary" (click)="cancelEditing()">Cancel</button>
+    </form>
+  
+    <!-- Display Profile Information -->
+    <div *ngIf="!isEditing">
+      <!-- Display Profile Image -->
+      <div class="mb-3">
+        <img
+          *ngIf="profileImageUrl"
+          [src]="profileImageUrl"
+          alt="User Image"
+          class="img-thumbnail"
+          width="150"
+        />
+        <img
+          *ngIf="!profileImageUrl"
+          src="assets/images/default-profile.png"
+          alt="Default Profile Image"
+          class="img-thumbnail"
+          width="150"
+        />
+      </div>
+  
+      <!-- Display User Information -->
+      <p><strong>Name:</strong> {{ user.name }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Phone Number:</strong> {{ user.phone_number }}</p>
+      <p><strong>Address:</strong> {{ user.address }}</p>
+  
+      <!-- Edit Button -->
+      <button class="btn btn-primary" (click)="enableEditing()">Edit Profile</button>
+    </div>
+  </div>
+  
+  <!-- Loading Indicator -->
+  <div *ngIf="!user">
+    <p>Loading profile...</p>
+  </div>
+  

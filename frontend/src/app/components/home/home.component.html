@@ -32,7 +32,7 @@
   <div class="categories-content">
     <div class="category-title">Explore Our Categories</div>
     <div class="categories">
-      <div class="category" *ngFor="let category of categories">
+      <div class="category" *ngFor="let category of categories" (click)="onCategoryClick(category.id)">
         <img [src]="category.image" alt="{{ category.name }}">
         <p>{{ category.name }}</p>
       </div>
@@ -47,7 +47,7 @@
       Cutting-edge auction platform. Competitive pricing. Unlock endless opportunities and watch your auction business
       thrive with just a few simple steps.
     </p>
-    <button class="btn" routerLink="/create-auction">Sell on TOPGAVEL</button>
+    <button class="btn" routerLink="/addAuction">Sell on TOPGAVEL</button>
   </div>
   <!-- End Selling Section -->
 
@@ -110,14 +110,24 @@
   <div class="container">
     <div class="category-title">Top Auctions</div>
     <div class="top-auctions">
-      <div class="top-auction" *ngFor="let topAuction of topAuctions">
-        <img [src]="topAuction.image | safeUrl" alt="{{ topAuction.name }}">
+      <div class="top-auction">
+        <img src="https://i.pinimg.com/564x/85/0a/ca/850aca7cd77c110e99ab20862aef14cf.jpg" alt="">
         <div class="top-auction-winner">
           <div class="winner-info">
-            <img [src]="topAuction.winnerImage | safeUrl" alt="{{ topAuction.winnerName }}">
-            <p class="winner-name">{{ topAuction.winnerName }}</p>
+            <img src="https://i.pinimg.com/474x/3d/2e/ae/3d2eae4e497f028babdada44978fe851.jpg" alt="">
+            <p class="winner-name">John Doe</p>
           </div>
-          <p class="price">{{ topAuction.price | currency }}</p>
+          <p class="price">$54345.08</p>
+        </div>
+      </div>
+      <div class="top-auction">
+        <img src="https://i.pinimg.com/564x/d4/2e/a0/d42ea0c760d91a64ab632a2bb950992f.jpg" alt="">
+        <div class="top-auction-winner">
+          <div class="winner-info">
+            <img src="https://i.pinimg.com/564x/06/22/e8/0622e80b0b75c6cfb005ecf2a18c02b6.jpg" alt="">
+            <p class="winner-name">Mary Gard</p>
+          </div>
+          <p class="price">$4135.08</p>
         </div>
       </div>
     </div>

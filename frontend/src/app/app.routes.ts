@@ -10,6 +10,7 @@ import { AddAuctionComponent } from './components/add-auction/add-auction.compon
 import { AuctionDetailsComponent } from './components/auction-details/auction-details.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { GuidesComponent } from './components/guides/guides.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { EmailVerficationComponent } from './components/email-verfication/email-verfication.component';
 import { authGuard } from './guards/auth.guard';
 import { AuctionComponent } from './components/auction/auction.component';
@@ -23,7 +24,9 @@ export const routes: Routes = [
     {path: 'auction/:id', component: AuctionComponent, canActivate: [verifyemailGuard]},
     {path: 'bids', component: BidsComponent , canActivate: [verifyemailGuard]},
     {path: 'bid/:id', component: BidsComponent , canActivate: [verifyemailGuard]},
-    {path: 'auction-details', component: AuctionDetailsComponent , canActivate: [verifyemailGuard]},
+
+    { path: 'profile', component: ProfileComponent ,canActivate:[verifyemailGuard]},
+   {path: 'auction-details/:id', component: AuctionDetailsComponent , canActivate: [verifyemailGuard]},
     {path: 'contact', component: ContactComponent, canActivate: [verifyemailGuard]},
     {path: 'login', component: LoginComponent, canActivate: [noAuthGuard]},
     {path: 'register', component: RegisterComponent, canActivate: [noAuthGuard]},

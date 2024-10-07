@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { SafeUrlPipe } from '../../pipes/safe-url.pipe'; 
 
 interface Category {
+ id: number;
   name: string;
   image: string;
 }
@@ -36,14 +37,15 @@ export class HomeComponent implements OnInit {
   totalPages: number = 0;
   perPage: number = 10;
 
-  categories: Category[] = [
-    { name: 'Furniture', image: 'assets/images/furniture.jpg' },
-    { name: 'Home Decor', image: 'assets/images/decor.jpg' },
-    { name: 'Fine Art', image: 'assets/images/art.jpg' },
-    { name: 'Birds', image: 'assets/images/bird.jpg' },
-    { name: 'Animals', image: 'assets/images/animal.jpg' },
-    { name: 'Motor Vehicles', image: 'assets/images/vehicles.jpg' }
-  ];
+    categories: Category[] = [
+      { id: 1, name: 'Furniture', image: 'assets/images/furniture.jpg' },
+      { id: 2, name: 'Home Decor', image: 'assets/images/decor.jpg' },
+      { id: 3, name: 'Fine Art', image: 'assets/images/art.jpg' },
+      { id: 4, name: 'Birds', image: 'assets/images/bird.jpg' },
+      { id: 5, name: 'Animals', image: 'assets/images/animal.jpg' },
+      { id: 6, name: 'Motor Vehicles', image: 'assets/images/vehicles.jpg' }
+    ];
+    
 
   topAuctions: TopAuction[] = [
     {
@@ -158,7 +160,34 @@ export class HomeComponent implements OnInit {
     }
     this.filterAuctions();
   }
+  onCategoryClick(categoryId: number): void {
+    console.log('Selected Category ID:', categoryId);
+    this.auctionService.searchByCategory(categoryId).subscribe({
+      next: (response: PaginatedAuctions) => {
+        this.filteredAuctions = response.data; 
+        this.currentPage = response.meta.current_page; 
+        this.totalPages = response.meta.last_page; 
+        console.log('Auctions for Category ID:', categoryId, this.filteredAuctions);
+        
+       /*  if (this.filteredAuctions.length > 0) {
+          const firstAuctionId = this.filteredAuctions[0].id; 
+          console.log('First Auction ID:', firstAuctionId); 
+          this.goToAuctionDetails(firstAuctionId); 
+        } else {
+          console.warn('No auctions found for the selected category.');
+        } */
+      },
+      error: (err) => {
+        console.error('Error fetching auctions by category:', err);
+      }
+    });
+}
 
+  
+  
+  
+  
+  
   /**
    */
   nextPage(): void {
@@ -175,7 +204,7 @@ export class HomeComponent implements OnInit {
     }
   }
   goToAuctionDetails(auctionId: string): void {
-    this.router.navigate(['/auction', auctionId]);
+    this.router.navigate(['/auction-details', auctionId]);
   }
   
 }

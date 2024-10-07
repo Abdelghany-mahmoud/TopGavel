@@ -29,7 +29,7 @@ class AuctionResource extends JsonResource
             'approval_status'=>$this ->approval_status,
             'item_media' => $this->images,
             'item_country' => $this->item_country,
-            'creator' => new CustomerRescource($this->customer),
+            'creator' => new CustomerResource($this->customer),
             'bids' => new BidResource($this->bids)
         ];
     }
