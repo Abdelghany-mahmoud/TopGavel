@@ -125,15 +125,15 @@ class AuctionController extends Controller
       'item_description' => ['required', 'string', 'min:15', 'max:255'],
       'starting_bid' => ['required', 'integer'],
       'bid_increment' => ['required', 'integer'],
-      // 'auction_start_time' => ['required', 'date', 'after:now'],
-           'auction_start_time' => ['required', 'date', function ($attribute, $value, $fail) {
-            $startTime = \Carbon\Carbon::parse($value);
-          $minStartTime = \Carbon\Carbon::now()->addDay();
+      'auction_start_time' => ['required', 'date', 'after:now'],
+      //      'auction_start_time' => ['required', 'date', function ($attribute, $value, $fail) {
+      //       $startTime = \Carbon\Carbon::parse($value);
+      //     $minStartTime = \Carbon\Carbon::now()->addDay();
           
-          if ($startTime->lt($minStartTime)) {
-              $fail('The auction start time must be at least 24 hours from now.');
-          }
-      }], 
+      //     if ($startTime->lt($minStartTime)) {
+      //         $fail('The auction start time must be at least 24 hours from now.');
+      //     }
+      // }], 
       'auction_end_time' => ['required', 'date'],
       'item_country' => ['required', 'string'],
       'item_media.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',

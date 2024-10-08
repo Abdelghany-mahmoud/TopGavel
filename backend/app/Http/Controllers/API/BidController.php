@@ -74,11 +74,13 @@ class BidController extends Controller
                 "message" => "You can't participate in this auction. This auction has ended.",
             ], 400);
         }
-        // if ($auction->auction_status === "Closed") {
-        //     return response()->json([
-        //         "message" => "You can't participate in this auction. This auction is closed.",
-        //     ], 400);
-        // }
+
+        if ($auction->approval_status !=='approved') {
+            return response()->json([
+                "message" => "This auction is not approved yet.",
+            ], 400);
+        }
+     
 
 
         // Get the last bid on the auction, if available
@@ -151,6 +153,14 @@ class BidController extends Controller
             $auction->auction_end_time = $auctionEndTime->addMinutes(2)->toDateTimeString();
             $auction->save();
         }
+     
+        $winningBid = Bid::where('auction_id', $auction->id)->latest('created_at')->first();
+            if ($winningBid) {
+                $auction->winning_bidder_id = $winningBid->customer_id;
+                $auction->save();
+                    }
+                
+        
 
         $admins = User::where('role', 'admin')->get();
 
