@@ -52,4 +52,8 @@ class Auction extends Model
     {
         return $this->hasMany(Image::class);
     }
+    public function winningBidder()
+    {
+        return $this->belongsTo(Customer::class, 'winning_bidder_id');
+    }
 }

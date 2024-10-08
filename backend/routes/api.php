@@ -19,6 +19,7 @@ Route::apiResource('user', UserController::class);
 Route::get('/auction/active-auctions', [AuctionController::class, 'showActiveAuctions']); 
 Route::get('/auction/approved', [AuctionController::class, 'getApprovedAuctions']); 
 Route::get('/auction/pending', [AuctionController::class, 'pendingAuctions']); 
+Route::get('/auction/finished', [AuctionController::class, 'finishedAuctions']); 
 Route::get('/auction/search', [AuctionController::class, 'search']); 
 Route::get('/auction/search-by-category', [AuctionController::class, 'searchByCategory']); 
 

@@ -16,21 +16,31 @@ class AuctionResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $lastBid = $this->bids()->latest()->first(); // Fetch the last bid
+
         return [
-            "auction_id" => $this->id,
-            'item_category' => $this->category->name,
-            'item_name' => $this->item_name,
-            'item_description' => $this->item_description,
-            'starting_bid' => $this->starting_bid,
-            'bid_increment' => $this->bid_increment,
-            'auction_start_time' => $this->auction_start_time,
-            'auction_end_time' => $this->auction_end_time,
-            'auction_status'=> $this ->auction_status,
-            'approval_status'=>$this ->approval_status,
-            'item_media' => new ImageResource($this->images),
-            'item_country' => $this->item_country,
-            'creator' => new CustomerResource($this->customer),
-            'bids' => new BidResource($this->bids)
-        ];
+
+
+        "auction_id" => $this->id,
+        'item_category' => $this->category->name,
+        'item_name' => $this->item_name,
+        'item_description' => $this->item_description,
+        'starting_bid' => $this->starting_bid,
+        'bid_increment' => $this->bid_increment,
+        'auction_start_time' => $this->auction_start_time,
+        'auction_end_time' => $this->auction_end_time,
+        'auction_status'=> $this->auction_status,
+        'approval_status'=>$this->approval_status,
+        'item_media' => new ImageResource($this->images),
+        'item_country' => $this->item_country,
+        'creator' => new CustomerResource($this->customer),
+        'bids' => new BidResource($this->bids),
+        'winning_bidder' => $this->winningBidder ? [
+            'name' => $this->winningBidder->user->name,
+        ] : null,
+        'winning bid' => $lastBid ? $lastBid->bid_amount : null, 
+
+            ];
+
     }
 }
