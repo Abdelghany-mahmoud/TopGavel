@@ -1,3 +1,4 @@
+<!-- profile.component.html -->
 <div class="profile-container" *ngIf="user">
     <h2>User Profile</h2>
   
@@ -9,8 +10,35 @@
       {{ error }}
     </div>
   
+    <!-- Display Profile Information -->
+    <div class="profile-info" *ngIf="!isEditing">
+      <div class="profile-picture">
+        <img
+          *ngIf="profileImageUrl"
+          [src]="profileImageUrl"
+          alt="User Image"
+        />
+        <img
+          *ngIf="!profileImageUrl"
+          src="assets/images/default-profile.png"
+          alt="Default Profile Image"
+        />
+        <button class="edit-picture-button" (click)="changePicture()">
+          <i class="fas fa-edit"></i>
+        </button>
+        <input type="file" id="profile_picture_input" (change)="onFileSelect($event)" hidden />
+      </div>
+      <div class="user-details">
+        <p><strong>Name:</strong> {{ user.name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Phone Number:</strong> {{ user.phone_number }}</p>
+        <p><strong>Address:</strong> {{ user.address }}</p>
+        <button class="btn btn-primary" (click)="enableEditing()">Edit Profile</button>
+      </div>
+    </div>
+  
     <!-- Edit Profile Form -->
-    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" *ngIf="isEditing">
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" *ngIf="isEditing" class="edit-form">
       <!-- Profile Image Upload -->
       <div class="form-group">
         <label for="profile_picture">Profile Image</label>
@@ -22,8 +50,8 @@
           accept="image/*"
         />
         <!-- Preview Selected Image -->
-        <div *ngIf="profileImageUrl" class="mt-2">
-          <img [src]="profileImageUrl" alt="Profile Image Preview" class="img-thumbnail" width="150" />
+        <div *ngIf="profileImageUrl" class="image-preview">
+          <img [src]="profileImageUrl" alt="Profile Image Preview" class="img-thumbnail" />
         </div>
       </div>
   
@@ -37,7 +65,7 @@
           type="text"
           placeholder="Enter your name"
         />
-        <div *ngIf="profileForm.get('name')?.invalid && profileForm.get('name')?.touched" class="text-danger">
+        <div *ngIf="profileForm.get('name')?.invalid && profileForm.get('name')?.touched" class="error">
           Name is required and must not exceed 255 characters.
         </div>
       </div>
@@ -52,7 +80,7 @@
           type="email"
           placeholder="Enter your email"
         />
-        <div *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched" class="text-danger">
+        <div *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched" class="error">
           The email is invalid or already exists.
         </div>
       </div>
@@ -67,7 +95,7 @@
           type="text"
           placeholder="Enter your phone number"
         />
-        <div *ngIf="profileForm.get('phone_number')?.invalid && profileForm.get('phone_number')?.touched" class="text-danger">
+        <div *ngIf="profileForm.get('phone_number')?.invalid && profileForm.get('phone_number')?.touched" class="error">
           Phone number is required.
         </div>
       </div>
@@ -82,7 +110,7 @@
           type="text"
           placeholder="Enter your address"
         />
-        <div *ngIf="profileForm.get('address')?.invalid && profileForm.get('address')?.touched" class="text-danger">
+        <div *ngIf="profileForm.get('address')?.invalid && profileForm.get('address')?.touched" class="error">
           Address is required.
         </div>
       </div>
@@ -97,7 +125,7 @@
           type="password"
           placeholder="Enter new password"
         />
-        <div *ngIf="profileForm.get('password')?.invalid && profileForm.get('password')?.touched" class="text-danger">
+        <div *ngIf="profileForm.get('password')?.invalid && profileForm.get('password')?.touched" class="error">
           Password must be at least 8 characters long and contain an uppercase letter, a lowercase letter, a number, and a special character.
         </div>
       </div>
@@ -111,49 +139,21 @@
           type="password"
           placeholder="Confirm your password"
         />
-        <div *ngIf="profileForm.hasError('mismatch') && profileForm.get('password_confirmation')?.touched" class="text-danger">
+        <div *ngIf="profileForm.hasError('mismatch') && profileForm.get('password_confirmation')?.touched" class="error">
           Passwords do not match.
         </div>
       </div>
   
       <!-- Form Buttons -->
-      <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid">Save Changes</button>
-      <button type="button" class="btn btn-secondary" (click)="cancelEditing()">Cancel</button>
-    </form>
-  
-    <!-- Display Profile Information -->
-    <div *ngIf="!isEditing">
-      <!-- Display Profile Image -->
-      <div class="mb-3">
-        <img
-          *ngIf="profileImageUrl"
-          [src]="profileImageUrl"
-          alt="User Image"
-          class="img-thumbnail"
-          width="150"
-        />
-        <img
-          *ngIf="!profileImageUrl"
-          src="assets/images/default-profile.png"
-          alt="Default Profile Image"
-          class="img-thumbnail"
-          width="150"
-        />
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid">Save Changes</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelEditing()">Cancel</button>
       </div>
-  
-      <!-- Display User Information -->
-      <p><strong>Name:</strong> {{ user.name }}</p>
-      <p><strong>Email:</strong> {{ user.email }}</p>
-      <p><strong>Phone Number:</strong> {{ user.phone_number }}</p>
-      <p><strong>Address:</strong> {{ user.address }}</p>
-  
-      <!-- Edit Button -->
-      <button class="btn btn-primary" (click)="enableEditing()">Edit Profile</button>
-    </div>
+    </form>
   </div>
   
   <!-- Loading Indicator -->
-  <div *ngIf="!user">
+  <div *ngIf="!user" class="loading">
     <p>Loading profile...</p>
   </div>
   

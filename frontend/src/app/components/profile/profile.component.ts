@@ -1,3 +1,4 @@
+// profile.component.ts
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { UserService } from '../../services/user.service';
@@ -26,6 +27,7 @@ export class ProfileComponent implements OnInit {
     private userService: UserService,
     private authService: AuthService
   ) {
+    // Initialize the form with validation
     this.profileForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(255)]],
       email: ['', [Validators.required, Validators.email, Validators.maxLength(255)]],
@@ -138,15 +140,16 @@ export class ProfileComponent implements OnInit {
         email: this.profileForm.get('email')?.value,
         phone_number: this.profileForm.get('phone_number')?.value,
         address: this.profileForm.get('address')?.value,
-        password : this.profileForm.get('password')?.value,
-        pconfirmation : this.profileForm.get('password_confirmation')?.value,
+        password: this.profileForm.get('password')?.value,
+        password_confirmation: this.profileForm.get('password_confirmation')?.value,
+
 
 
       };
 
       if (this.profileForm.get('password')?.value) {
         data.password = this.profileForm.get('password')?.value;
-        data.pconfirmation = this.profileForm.get('password_confirmation')?.value;
+        data.password_confirmation = this.profileForm.get('password_confirmation')?.value;
       }
 
       this.userService.updateUserProfile(data).subscribe({
@@ -175,5 +178,15 @@ export class ProfileComponent implements OnInit {
   cancelEditing(): void {
     this.isEditing = false;
     this.loadUserProfile();
+  }
+
+  /**
+   * Trigger the hidden file input click
+   */
+  changePicture(): void {
+    const fileInput = document.getElementById('profile_picture_input') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.click();
+    }
   }
 }

@@ -44,3 +44,49 @@
 .thumbnail-image:hover {
   border: 1px solid var(--btn-color);
 }
+
+.auction-details-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 600px;
+  margin: 20px auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auction-details-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.auction-title {
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.auction-info p {
+  margin: 5px 0;
+  font-size: 1em;
+  color: #555;
+}
+
+.auction-status {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.auction-status.opened {
+  color: #28a745; /* green for opened */
+}
+
+.auction-status.closed {
+  color: #dc3545; /* red for closed */
+}
+
+.creator-info {
+  margin-top: 15px;
+  font-style: italic;
+  color: #666;
+}
