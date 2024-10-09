@@ -56,12 +56,9 @@
     <h2>Auction Listings</h2>
     <div *ngIf="filteredAuctions.length > 0; else noAuctions">
       <div class="auction-items">
-        <div *ngFor="let auction of filteredAuctions" class="auction-item" (click)="goToAuctionDetails(auction.id)" style="cursor: pointer;">
-          <div *ngIf="auction.images && auction.images.length > 0">
-            <img 
-              [src]="auction.images[0].path | safeUrl" 
-              alt="{{ auction.item_name }}"
-            >
+        <div *ngFor="let auction of filteredAuctions" class="auction-item" (click)="goToAuctionDetails(auction.auction_id)" style="cursor: pointer;">
+          <div *ngIf="auction.item_media && auction.item_media.length > 0">
+            <img [src]="'http://localhost:8000/uploads/images/' + auction.item_media[0].path" alt="{{ auction.item_name }}">
           </div>
           <div class="auction-info">
             <p class="item-description">

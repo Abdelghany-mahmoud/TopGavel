@@ -1,226 +1,48 @@
-<!-- <div class="auctions">
-  <h1>Auction Listings</h1>
-  <div *ngIf="auctions.length > 0; else noAuctions">
-    <div class="auction-items">
-      <div *ngFor="let auction of auctions" class="auction-item">
-        <img [src]="auction.item_media" alt="{{ auction.item_name }}">
-        <div class="auction-info">
-          <p class="category-name">{{ auction.category_name }}</p>
-          <p class="item-description">
-            <span class="item-name">{{ auction.item_name }}</span>
-            <br>
-            <span class="item-price">{{ auction.starting_bid }}</span>
-          </p>
-          <div class="item-location">
-            <i class="map fa-solid fa-location-dot"></i>
-            <span>{{ auction.item_country }}</span>
-          </div>
-          <p class="auction-end-date">{{ auction.auction_end_time }}</p>
-          <div class="bid-btn">
-            <button routerLink="/payment-verification"> Bid Now</button>
-          </div>
+
+<br>
+
+<h2>Auction Listings</h2>
+<br>
+
+<div *ngIf="auctions.length > 0; else noAuctions">
+  <div class="auction-items">
+    <div *ngFor="let auction of auctions" class="auction-item" (click)="goToAuctionDetails(auction.auction_id)" style="cursor: pointer;">
+      
+      <div *ngIf="auction.item_media && auction.item_media.length > 0">
+        <img [src]="'http://localhost:8000/uploads/images/' + auction.item_media[0].path" alt="{{ auction.item_name }}" class="auction-image">
+      </div>
+      
+      <div class="auction-info">
+        <p class="item-description">
+          <span class="item-name">{{ auction.item_name }}</span>
+          <br>
+          
+          <span class="item-price">{{ auction.starting_bid }} $</span>
+        </p>
+
+        <div class="item-location">
+          <i class="map fa-solid fa-location-dot"></i>
+          <span>{{ auction.item_country }}</span>
+        </div>
+
+        <p class="auction-end-date">
+          Ends: {{ auction.auction_end_time | date:'short' }}
+        </p>
+
+        <div class="bid-btn">
+          <button routerLink="/payment-verification">Bid Now</button>
         </div>
       </div>
     </div>
   </div>
-  <ng-template #noAuctions>
-    <p>No auctions available at this time.</p>
-  </ng-template>
-</div> -->
 
-
-<!-- Hero Section -->
-<div class="hero">
-  <div class="search-bar">
-    <div class="search-title">
-      <h1>Dive into a world of unique treasures, rare finds, and competitive bidding</h1>
-    </div>
-    <div class="search-container">
-      <i class="map fa-solid fa-location-dot"></i>
-      <input type="text" placeholder="Search by state, city or auction">
-      <button type="button">Search Auctions</button>
-    </div>
+  <div class="pagination-controls">
+    <button (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+    <span>Page {{ currentPage }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
   </div>
 </div>
 
-<!-- Categories Section -->
-<div class="container categories">
-  <div class="category-title">Categories</div>
-  <div class="categories-dashboard">
-      <div class="category category1">
-          <img src="assets/images/bird.png" alt="">
-          <p>Birds</p>
-      </div>
-      <div class="category category2">
-          <img src="assets/images/animal.png" alt="">
-          <p>Animals</p>
-      </div>
-      <div class="category category3">
-          <img src="assets/images/furniture.png" alt="">
-          <p>Furniture</p>
-      </div>
-      <div class="category category4">
-          <img src="assets/images/motor-vehicle.png" alt="">
-          <p>Motor Vehicles</p>
-      </div>
-      <div class="category category5">
-          <img src="assets/images/fine-art.png" alt="">
-          <p>Fine Art</p>
-      </div>
-      <div class="category category5">
-          <img src="assets/images/home-decor.png" alt="">
-          <p>Home Decor</p>
-      </div>
-  </div>
-</div>
-<!-- End Categories -->
-
-<!-- Sort by Section -->
-<div class="container sort-dropdown">
-  <label for="sort-options">Sort by:</label>
-  <select id="sort-options">
-    <option value="ending-soon">Ending Soonest</option>
-    <option value="name">Name</option>
-    <option value="price-low-high">Price: Low to High</option>
-    <option value="price-high-low">Price: High to Low</option>
-  </select>
-</div>
-<!-- End Sort by Section -->
-
-<!-- Auctions Section -->
-<div class="container auctions-dashboard">
-  <div class="sidebar"></div>
-  <div class="auctions">
-      <div class="auction-items">
-        <div class="auction-item">
-          <img routerLink="/auction-details" src="https://i.pinimg.com/564x/19/8f/2a/198f2a74ca46ab1a2afbd9da547f10ff.jpg" alt="">
-          <p class="auction-time-out">Begins to close</p>
-          <div class="auction-info">
-            <p class="category-name">Birds</p>
-            <p class="item-description"><span class="item-name">Canary</span><span class="item-price">$102.90</span></p>
-            <div class="item-location">
-              <i class="map fa-solid fa-location-dot"></i>
-              <span> United States, New York</span>
-            </div>
-            <p class="auction-end-date">Fri, Sep 20 2024 at 5:00 PM</p>
-            <div class="bid-btn">
-              <button routerLink="/payment-verification">Bid Now</button>
-            </div>
-          </div>
-        </div>
-        <div class="auction-item">
-          <img  routerLink="/auction-details" src="https://i.pinimg.com/564x/6b/44/33/6b4433e3d71c125fa9a4cc8e83b84865.jpg" alt="">
-          <p class="auction-time-out">Begins to close</p>
-          <div class="auction-info">
-            <p class="category-name">Birds</p>
-            <p class="item-description"><span class="item-name">Canary</span><span class="item-price">$102.90</span></p>
-            <div class="item-location">
-              <i class="map fa-solid fa-location-dot"></i>
-              <span> United States, New York</span>
-            </div>
-            <p class="auction-end-date">Fri, Sep 20 2024 at 5:00 PM</p>
-            <div class="bid-btn">
-              <button routerLink="/payment-verification">Bid Now</button>
-            </div>
-          </div>
-        </div>
-        <div class="auction-item">
-          <img routerLink="/auction-details" src="https://i.pinimg.com/474x/d9/f5/67/d9f567713fe9186b06686bf832c75a85.jpg" alt="">
-          <p class="auction-time-out">Begins to close</p>
-          <div class="auction-info">
-            <p class="category-name">Birds</p>
-            <p class="item-description"><span class="item-name">Canary</span><span class="item-price">$102.90</span></p>
-            <div class="item-location">
-              <i class="map fa-solid fa-location-dot"></i>
-              <span> United States, New York</span>
-            </div>
-            <p class="auction-end-date">Fri, Sep 20 2024 at 5:00 PM</p>
-            <div class="bid-btn">
-              <button routerLink="/payment-verification">Bid Now</button>
-            </div>
-          </div>
-        </div>
-        <div class="auction-item">
-          <img src="https://i.pinimg.com/564x/59/1e/dc/591edc88de8f7b82d5313a3b222f6c8f.jpg" alt="">
-          <p class="auction-time-out">Begins to close</p>
-          <div class="auction-info">
-            <p class="category-name">Birds</p>
-            <p class="item-description"><span class="item-name">Canary</span><span class="item-price">$102.90</span></p>
-            <div class="item-location">
-              <i class="map fa-solid fa-location-dot"></i>
-              <span> United States, New York</span>
-            </div>
-            <p class="auction-end-date">Fri, Sep 20 2024 at 5:00 PM</p>
-            <div class="bid-btn">
-              <button routerLink="/payment-verification">Bid Now</button>
-            </div>
-          </div>
-        </div>
-        <div class="auction-item">
-          <img routerLink="/auction-details" src="https://i.pinimg.com/564x/19/8f/2a/198f2a74ca46ab1a2afbd9da547f10ff.jpg" alt="">
-          <p class="auction-time-out">Begins to close</p>
-          <div class="auction-info">
-            <p class="category-name">Birds</p>
-            <p class="item-description"><span class="item-name">Canary</span><span class="item-price">$102.90</span></p>
-            <div class="item-location">
-              <i class="map fa-solid fa-location-dot"></i>
-              <span> United States, New York</span>
-            </div>
-            <p class="auction-end-date">Fri, Sep 20 2024 at 5:00 PM</p>
-            <div class="bid-btn">
-              <button routerLink="/payment-verification">Bid Now</button>
-            </div>
-          </div>
-        </div>
-        <div class="auction-item">
-          <img routerLink="/auction-details" src="https://i.pinimg.com/564x/6b/44/33/6b4433e3d71c125fa9a4cc8e83b84865.jpg" alt="">
-          <p class="auction-time-out">Begins to close</p>
-          <div class="auction-info">
-            <p class="category-name">Birds</p>
-            <p class="item-description"><span class="item-name">Canary</span><span class="item-price">$102.90</span></p>
-            <div class="item-location">
-              <i class="map fa-solid fa-location-dot"></i>
-              <span> United States, New York</span>
-            </div>
-            <p class="auction-end-date">Fri, Sep 20 2024 at 5:00 PM</p>
-            <div class="bid-btn">
-              <button routerLink="/payment-verification">Bid Now</button>
-            </div>
-          </div>
-        </div>
-        <div class="auction-item">
-          <img routerLink="/auction-details"  src="https://i.pinimg.com/474x/d9/f5/67/d9f567713fe9186b06686bf832c75a85.jpg" alt="">
-          <p class="auction-time-out">Begins to close</p>
-          <div class="auction-info">
-            <p class="category-name">Birds</p>
-            <p class="item-description"><span class="item-name">Canary</span><span class="item-price">$102.90</span></p>
-            <div class="item-location">
-              <i class="map fa-solid fa-location-dot"></i>
-              <span> United States, New York</span>
-            </div>
-            <p class="auction-end-date">Fri, Sep 20 2024 at 5:00 PM</p>
-            <div class="bid-btn">
-              <button routerLink="/payment-verification">Bid Now</button>
-            </div>
-          </div>
-        </div>
-        <div class="auction-item">
-          <img  routerLink="/auction-details" src="https://i.pinimg.com/564x/59/1e/dc/591edc88de8f7b82d5313a3b222f6c8f.jpg" alt="">
-          <p class="auction-time-out">Begins to close</p>
-          <div class="auction-info">
-            <p class="category-name">Birds</p>
-            <p class="item-description"><span class="item-name">Canary</span><span class="item-price">$102.90</span></p>
-            <div class="item-location">
-              <i class="map fa-solid fa-location-dot"></i>
-              <span> United States, New York</span>
-            </div>
-            <p class="auction-end-date">Fri, Sep 20 2024 at 5:00 PM</p>
-            <div class="bid-btn">
-              <button routerLink="/payment-verification">Bid Now</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
-
+<ng-template #noAuctions>
+  <p>No auctions available at this time.</p>
+</ng-template>

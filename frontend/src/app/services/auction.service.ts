@@ -10,19 +10,19 @@ export interface Image {
 }
 
 export interface Auction {
-  id: string;
+  auction_id: string;
   category_id: number;
   item_name: string;
-  item_category:any;
+  item_category: any;
   item_description: string;
   starting_bid: number;
   bid_increment: number;
   auction_start_time: string;
   auction_end_time: string;
   item_country: string;
-  creator:any;
+  creator: any;
   approval_status: string;
-  images: Image[];
+  item_media: Image[];
 }
 
 export interface PaginatedAuctions {
@@ -39,7 +39,7 @@ export interface PaginatedAuctions {
   providedIn: 'root',
 })
 export class AuctionService {
-  private apiUrl = 'http://localhost:8000/api/auction'; 
+  private apiUrl = 'http://localhost:8000/api/auction';
 
   constructor(private http: HttpClient) { }
 
@@ -86,7 +86,7 @@ export class AuctionService {
    * @returns 
    */
   createAuction(auctionData: FormData): Observable<Auction> {
-    const headers = this.getAuthHeaders(false); 
+    const headers = this.getAuthHeaders(false);
     const options = headers ? { headers } : {};
 
     return this.http.post<Auction>(this.apiUrl, auctionData, options)
@@ -102,12 +102,12 @@ export class AuctionService {
     let params = new HttpParams()
       .set('page', page.toString())
       .set('per_page', perPage.toString());
-  
+
     return this.http.get<PaginatedAuctions>(`${this.apiUrl}/`, { params }).pipe(
       catchError(this.handleError)
     );
   }
-  
+
 
   /**
    * @param page 
@@ -118,7 +118,8 @@ export class AuctionService {
     let params = new HttpParams()
       .set('page', page.toString())
       .set('per_page', perPage.toString());
-    return this.http.get<PaginatedAuctions>(`${this.apiUrl}/active-auctions`, { params })
+
+    return this.http.get<PaginatedAuctions>(`${this.apiUrl}/active-auctions`, { params ,headers: this.getAuthHeaders()})
       .pipe(catchError(this.handleError));
   }
 
@@ -131,7 +132,20 @@ export class AuctionService {
     let params = new HttpParams()
       .set('page', page.toString())
       .set('per_page', perPage.toString());
+
     return this.http.get<PaginatedAuctions>(`${this.apiUrl}/pending`, { params, headers: this.getAuthHeaders() })
+      .pipe(catchError(this.handleError));
+  }
+  /**
+ * @param id 
+ * @returns 
+ */
+  getApprovedAuctions(page: number = 1, perPage: number = 10): Observable<PaginatedAuctions> {
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('per_page', perPage.toString());
+
+    return this.http.get<PaginatedAuctions>(`${this.apiUrl}/approved`, { params, headers: this.getAuthHeaders()  })
       .pipe(catchError(this.handleError));
   }
 
@@ -155,13 +169,16 @@ export class AuctionService {
    * @param id 
    * @returns 
    */
-  getAuctionById(id: any): Observable<Auction> {
+  getAuctionById(id: string): Observable<any> {
     const headers = this.getAuthHeaders();
     if (!headers) {
-      return throwError('Token is missing. Please log in.');
+      return throwError('Token is missing. Please log in.'); // Return error if token is missing
     }
-    return this.http.get<Auction>(`${this.apiUrl}/${id}`, { headers })
-      .pipe(catchError(this.handleError));
+    return this.http.get<any>(`${this.apiUrl}/${id}`, { headers })
+      .pipe(
+        map(response => response.data || []),
+        catchError(this.handleError)
+      );
   }
 
   /**
@@ -190,19 +207,6 @@ export class AuctionService {
     return this.http.delete(`${this.apiUrl}/${id}`, { headers })
       .pipe(catchError(this.handleError));
   }
-
-  /**
-   * @param id 
-   * @returns 
-   */
-  getApprovedAuctions(page: number = 1, perPage: number = 10): Observable<PaginatedAuctions> {
-    let params = new HttpParams()
-        .set('page', page.toString())
-        .set('per_page', perPage.toString());
-  
-    return this.http.get<PaginatedAuctions>(`${this.apiUrl}/approved`, { params })
-        .pipe(catchError(this.handleError));
-}
 
   approveAuction(id: number): Observable<any> {
     const headers = this.getAuthHeaders();

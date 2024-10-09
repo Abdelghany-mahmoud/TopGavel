@@ -9,7 +9,6 @@
     <ul class="navbar-menu">
       <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
       <li><a routerLink="/auctions" routerLinkActive="active">Open Auctions</a></li>
-      
       <li class="dropdown">
         <a routerLink="/items" routerLinkActive="active" class="dropdown-toggle">
           Browse Items <i class="fa fa-caret-down"></i>
@@ -33,7 +32,7 @@
       <ng-container *ngIf="isRegistered">
         <button class="sell-btn" routerLink="/addAuction">Sell on <span class="gavel">T</span>OPGAVEL</button>
         <i class="fa-solid fa-bell bell"></i>
-      
+
         <!-- User profile with dropdown -->
         <div class="user-profile" (click)="toggleDropdown($event)">
           <img [src]="userProfileImage" alt="User Image" class="user-image">
@@ -48,7 +47,7 @@
           </ul>
         </div>
       </ng-container>
-      
+
       <!-- Show login/signup buttons if user is not logged in -->
       <ng-container *ngIf="!isLoggedIn">
         <button class="btn login-btn" routerLink="/login" [class.active]="isLoginActive">Login</button>

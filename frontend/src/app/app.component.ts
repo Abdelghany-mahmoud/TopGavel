@@ -54,7 +54,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        const hideHeaderFooterRoutes = ['/login', '/register'];  
+        const hideHeaderFooterRoutes = ['/login', '/register','/errors'];  
 
         this.showHeader = !hideHeaderFooterRoutes.includes(this.router.url);
         this.showFooter = !hideHeaderFooterRoutes.includes(this.router.url);

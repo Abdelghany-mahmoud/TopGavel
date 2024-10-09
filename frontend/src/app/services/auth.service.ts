@@ -37,6 +37,7 @@ export class AuthService {
         if (response && response.token) {
           const userData = {
             token: response.token,
+            role: response.user.role,
             is_email_verified: response.user.is_email_verified,
             email: response.user.email,
             name: response.user.name
@@ -81,6 +82,15 @@ export class AuthService {
     if (userJson){
       const user = JSON.parse(userJson);
       return user.is_email_verified == 1;
+    }
+    return false;
+  }
+
+  is_admin(): boolean {
+    const userJson = localStorage.getItem('user');
+    if (userJson){
+      const user = JSON.parse(userJson);
+      return user.role == 'admin';
     }
     return false;
   }

@@ -1,6 +1,30 @@
-<p>dashboard works!</p>
-<p>dashboard works!</p>
-<p>dashboard works!</p>
-<p>dashboard works!</p>
-<p>dashboard works!</p>
-<p>dashboard works!</p>
+<div class="dashboard-container" style="padding-top: 80px;">
+    <aside class="sidebar">
+        <h3>Admin Dashboard</h3>
+        <ul>
+            <li><a href="#">Auctions</a></li>
+            <li><a href="#">Users</a></li>            
+        </ul>
+    </aside>
+    <main class="main-content">
+        <div class="card-container">
+            <a class="card" href="#">
+                <h3>Pending Auctions</h3>
+                <p class="counter">{{Pauctions.length}}</p>
+            </a>
+            <div class="card" (click)="goToAuctions()">
+                <h3>Active Auctions</h3>
+                <p class="counter">{{Aauctions.length}}</p>
+              </div>
+              
+            <a class="card" href="#">
+                <h3>About to start</h3>
+                <p class="counter">{{ATSauctions.length}}</p>
+            </a>
+            <a class="card" href="#">
+                <h3>Deleted Auctions</h3>
+                <p class="counter">{{Dauctions.length}}</p>
+            </a>
+        </div>
+    </main>
+</div>

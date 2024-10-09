@@ -1,9 +1,9 @@
-<div class="m-5 row">
-  <app-auction-details [auctionId]='auctionId' class="col-4 border border-primary"></app-auction-details>
-  <app-bids [auctionId]='auctionId' class="col-4 p-5 border border-primary" *ngIf="!isAuctionEnded"></app-bids>
-  <app-comments [auctionId]='auctionId' class="col-4 p-5 border border-primary" *ngIf="!isAuctionEnded"></app-comments>
-</div>
-
-<div *ngIf="isAuctionEnded">
-  <p>The auction has ended, you cannot place a bid or comment.</p>
+<div class="auction-container" style="padding-top: 80px;">
+  <app-auction-details [auctionId]='auctionId'></app-auction-details>
+  <app-bids [auctionId]='auctionId' *ngIf="!isAuctionEnded"></app-bids>
+  <div *ngIf="isAuctionEnded">
+    <p>The auction has ended, you cannot place a bid or comment.</p>
+  </div>
+  
+  <app-comments [auctionId]='auctionId' *ngIf="!isAuctionEnded"></app-comments>
 </div>

@@ -26,7 +26,6 @@ Route::get('/auction/approved', [AuctionController::class, 'getApprovedAuctions'
 Route::get('/auction/pending', [AuctionController::class, 'pendingAuctions']); 
 Route::get('/auction/search', [AuctionController::class, 'search']); 
 Route::get('/auction/search-by-category', [AuctionController::class, 'searchByCategory']); 
-
 Route::post('/auction/approve/{id}', [AuctionController::class, 'approve']); 
 Route::post('/auction/rejected/{id}', [AuctionController::class, 'rejected']);
 

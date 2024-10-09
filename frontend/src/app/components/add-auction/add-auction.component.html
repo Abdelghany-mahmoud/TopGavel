@@ -1,12 +1,8 @@
 <div class="hero-title">
-  <h2 class=" container form-title">Thank you for participating in <span class="gavel">T</span>OPGAVEL's online auctions<br> Join the Auction Revolution, Showcase Your Exceptional Items and Connect with Enthusiastic Bidders</h2> 
+  <h2 class=" container form-title">Thank you for participating in
+    <span class="t">T</span><span class="gavel">OPGAVEL</span>'s online auctions<br>
+    Join the Auction Revolution, Showcase Your Exceptional Items and Connect with Enthusiastic Bidders</h2> 
 </div>
-
-<br><br><br>
-
-<br>
-
-
 <form [formGroup]="auctionForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
   <label for="category_id">Category ID</label>
   <input id="category_id" formControlName="category_id" type="number" required>
@@ -23,7 +19,7 @@
   <label for="item_description">Item Description</label>
   <textarea id="item_description" formControlName="item_description" required></textarea>
   <div *ngIf="auctionForm.get('item_description')?.invalid && auctionForm.get('item_description')?.touched">
-    <small class="error">Item Description is required.</small>
+    <small class="error">Item Description field must be at least 15 characters long.</small>
   </div>
 
   <label for="starting_bid">Starting Bid</label>

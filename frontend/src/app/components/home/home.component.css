@@ -231,9 +231,7 @@
     background-color: #f9f9f9;
     transition: transform 0.3s ease;
   }
-  .auction-item:not(:first-child) {
-    /* margin-left: 10px; */
-  }
+ 
  
   .auction-info {
     display: flex;

@@ -40,3 +40,4 @@ export class AuctionComponent implements OnInit {
     this.isAuctionEnded = this.auctionEndTime ? this.auctionEndTime < currentTime : false;
   }
 }
+

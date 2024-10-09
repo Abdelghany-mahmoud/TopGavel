@@ -4,11 +4,13 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CustomerResource;
+use App\Http\Resources\UserRescource;
 use App\Mail\OtpMail;
 use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -119,7 +121,7 @@ class UserController extends Controller
             $cust = Customer::where('user_id', $user->id)->first();
             $userdata = new CustomerResource($cust);
         } else {
-            $userdata = new UserResource($user);
+            $userdata = new UserRescource($user);
         }
 
         return response()->json([
@@ -200,7 +202,7 @@ class UserController extends Controller
             \Storage::delete($user->profile_image);
         }
 
-        $path = $request->file('profile_picture')->store('profile_images', 'public');
+        $path = $request->file('profile_picture')->store('images', 'public');
         $user->profile_image = $path;
     }
 

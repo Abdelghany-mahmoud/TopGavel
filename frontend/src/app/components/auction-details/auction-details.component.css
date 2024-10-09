@@ -1,48 +1,95 @@
 .auction-container {
-  display: flex;
-  gap: 50px;
-  width: 90%;
-  margin: auto;
-  margin-top: 150px;
-}
-.auction-status {
-  color: var(--success-color);
-}
-.auction-container h2 {
-  margin-top: 0px;
-}
-.image-section {
-  width: 50%;
-}
-
-.main-image {
-  width: 100%;
-  height: auto;
-  border: 2px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #ffffff; /* White background for contrast */
+    border: 1px solid #ddd; /* Light border for separation */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .image-gallery {
-  display: flex;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .main-image {
-  margin-right: 10px;
+    margin-bottom: 15px;
+}
+
+.auction-image {
+    border-radius: 5px;
+    width: 300px; /* Reduced image size */
+    height: auto; /* Maintain aspect ratio */
+    transition: transform 0.2s;
+}
+
+.auction-image:hover {
+    transform: scale(1.05); /* Slight zoom effect */
 }
 
 .thumbnails {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    display: flex;
+    gap: 10px;
 }
 
 .thumbnail-image {
-  cursor: pointer;
-  border: 1px solid #ddd;
-  padding: 2px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color 0.3s;
+    width: 80px; /* Fixed size for thumbnails */
+    height: auto; /* Maintain aspect ratio */
 }
 
 .thumbnail-image:hover {
-  border: 1px solid var(--btn-color);
+    border-color: #007bff; /* Highlight on hover */
+}
+
+.auction-details {
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2; /* Light gray background for details */
+    padding: 15px; /* Inner padding for details section */
+    border-radius: 5px; /* Rounded corners for details */
+}
+
+.auction-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333; /* Dark gray for title */
+}
+
+.auction-status {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.auction-status.opened {
+    color: green; /* Green for opened status */
+}
+
+.auction-status.closed {
+    color: red; /* Red for closed status */
+}
+
+.loading-message {
+    text-align: center;
+    font-size: 18px;
+    color: #777;
+    margin-top: 20px;
+}
+
+/* Additional styling for description and other fields */
+.auction-details p {
+    margin: 5px 0; /* Space between paragraphs */
+    color: #555; /* Medium gray for text */
+}
+
+.auction-details strong {
+    color: #007bff; /* Blue color for labels */
 }
 
 .auction-details-card {
