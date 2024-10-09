@@ -25,6 +25,9 @@ export class AuctionDetailsComponent implements OnInit {
     constructor(private auctionService: AuctionService, private route: ActivatedRoute, private router: Router) { }
 
     ngOnInit(): void {
+        this.route.paramMap.subscribe(params => {
+            this.auctionId = params.get('id') || '';
+        });
         this.loadAuctionDetails();
     }
 

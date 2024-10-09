@@ -102,6 +102,8 @@ class AuctionController extends Controller
   /////////////////////////////////////////////////////////////////////////////////////////////////////////
   public function finishedAuctions()
 {
+  if (Auth::user()->role === 'admin' || $user->id === $auction->customer->user_id) {
+
     $finishedAuctions = Auction::with(['winningBidder.user', 'customer'])
         ->where('auction_end_time', '<', Carbon::now())
         ->where('approval_status','approved')
@@ -109,6 +111,10 @@ class AuctionController extends Controller
         ->get();
 
     return AuctionResource::collection($finishedAuctions);
+  }
+   return response()->json([
+    'message' => 'Unauthorized.'
+  ], 403);
 }
 
 

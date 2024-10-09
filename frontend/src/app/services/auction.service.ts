@@ -11,18 +11,34 @@ export interface Image {
 
 export interface Auction {
   auction_id: string;
-  category_id: number;
+  // category_id: number;
+  // item_name: string;
+  // item_category: any;
+  // item_description: string;
+  // starting_bid: number;
+  // bid_increment: number;
+  // auction_start_time: string;
+  // auction_end_time: string;
+  // item_country: string;
+  // creator: any;
+  // approval_status: string;
+  item_media: Image[];
+  // winning_bidder: {
+  //   name: string;} | null;
+  // winning_bid: number | null;
+  // auction_id: number;
   item_name: string;
-  item_category: any;
   item_description: string;
   starting_bid: number;
   bid_increment: number;
   auction_start_time: string;
   auction_end_time: string;
-  item_country: string;
-  creator: any;
+  auction_status: string;
   approval_status: string;
-  item_media: Image[];
+  item_country: string;
+  winning_bidder: { name: string } | null;
+  'winning bid': number | null; // Use quotes for keys with spaces
+  creator: { name: string };
 }
 
 export interface PaginatedAuctions {
@@ -229,4 +245,14 @@ export class AuctionService {
     return this.http.post(`${this.apiUrl}/${id}/reject`, {}, { headers })
       .pipe(catchError(this.handleError));
   }
+
+  getFinishedAuctions(page: number = 1, perPage: number = 10): Observable<PaginatedAuctions> {
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('per_page', perPage.toString());
+
+    return this.http.get<PaginatedAuctions>(`${this.apiUrl}/finished`, { params, headers: this.getAuthHeaders() })
+      .pipe(catchError(this.handleError));
+  }
+
 }
