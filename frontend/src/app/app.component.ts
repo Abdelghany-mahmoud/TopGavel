@@ -13,6 +13,8 @@ import { AuctionsComponent } from './components/auctions/auctions.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { GuidesComponent } from './components/guides/guides.component';
 import { EmailVerficationComponent } from './components/email-verfication/email-verfication.component';
+import { FinishedAuctionsComponent } from './components/finished-auctions/finished-auctions.component';
+import { NotificationComponent } from './components/notifications/notifications.component';
 
 @Component({
   selector: 'app-root',
@@ -32,7 +34,9 @@ import { EmailVerficationComponent } from './components/email-verfication/email-
     GuidesComponent,
     DashboardComponent,
     EmailVerficationComponent,
-    CommentsComponent
+    CommentsComponent,
+    NotificationComponent,
+    FinishedAuctionsComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']  

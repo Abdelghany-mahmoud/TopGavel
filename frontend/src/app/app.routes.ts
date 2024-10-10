@@ -19,14 +19,15 @@ import { verifyemailGuard } from './guards/verifyemail.guard';
 import { ErrorsComponent } from './components/errors/errors.component';
 import { adminGuard } from './guards/admin.guard';
 import { FinishedAuctionsComponent } from './components/finished-auctions/finished-auctions.component';
+import { NotificationComponent } from './components/notifications/notifications.component';
 
 export const routes: Routes = [
     {path: '', component:HomeComponent},
-    {path: 'auctions', component:AuctionsComponent, canActivate: [verifyemailGuard]},
-    {path: 'auction/:id', component: AuctionComponent, canActivate: [verifyemailGuard]},
+    {path: 'auctions', component:AuctionsComponent, },
+    {path: 'auction/:id', component: AuctionComponent, },
     {path: 'bids', component: BidsComponent , canActivate: [verifyemailGuard]},
     {path: 'bid/:id', component: BidsComponent , canActivate: [verifyemailGuard]},
-    {path: 'auction-details', component: AuctionDetailsComponent , canActivate: [verifyemailGuard]},
+    {path: 'auction-details', component: AuctionDetailsComponent , },
     {path: 'contact', component: ContactComponent, canActivate: [verifyemailGuard]},
     {path: 'login', component: LoginComponent, canActivate: [noAuthGuard]},
     {path: 'register', component: RegisterComponent, canActivate: [noAuthGuard]},
@@ -39,6 +40,8 @@ export const routes: Routes = [
     {path: 'payment', component: PaymentComponent, canActivate: [verifyemailGuard]},
     {path: 'errors', component: ErrorsComponent},
     { path: 'finished-auctions', component: FinishedAuctionsComponent },
+    // { path: 'auctions/:id', component: AuctionDetailsComponent }
+    { path: 'notifications', component: NotificationComponent, canActivate: [verifyemailGuard] },
 
     {path: '**', redirectTo: '/errors'},
 

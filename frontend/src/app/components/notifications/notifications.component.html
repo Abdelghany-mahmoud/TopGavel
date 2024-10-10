@@ -1,0 +1,9 @@
+<p>notifications works!</p>
+<div class="notification-container">
+    <h2>Notifications</h2>
+    <div *ngFor="let notification of notifications" class="notification-card">
+      <p>{{ notification.data.message }}</p>
+      <a [routerLink]="['/auctions', notification.data.auction_id]">View Auction</a>
+    </div>
+  </div>
+  
