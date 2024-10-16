@@ -169,3 +169,53 @@
   .sell-btn:hover {
     background-color: var(--dark-color);
   }
+
+
+  .notification-bell {
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .notification-count {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    /* position: absolute; */
+    top: -5px;
+    right: -30px;
+  }
+  
+  .notification-dropdown {
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .notification-dropdown h4 {
+    text-align: center;
+  }
+  .notification-dropdown button {
+    color: blue;
+    text-decoration: underline;
+  }
+  
+  .notification-item {
+    margin-bottom: 10px;
+    
+  }
+  
+  .notification-item a {
+    display: inline-block;
+    margin-top: 5px;
+    color: black;
+  }
+  
+  .notification-item p {
+    margin: 0;
+  }
+  

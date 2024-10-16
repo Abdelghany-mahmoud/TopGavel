@@ -10,35 +10,31 @@
       <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a></li>
       <li><a routerLink="/auctions" routerLinkActive="active">Open Auctions</a></li>
       <li><a routerLink="/guides" routerLinkActive="active">Buying Guides & Tips</a></li>
-
-
-      <!-- <li class="dropdown">
-        <a routerLink="/items" routerLinkActive="active" class="dropdown-toggle">
-          Browse Items <i class="fa fa-caret-down"></i>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a routerLink="/items/category1">Furniture</a></li>
-          <li><a routerLink="/items/category2">Animals</a></li>
-          <li><a routerLink="/items/category3">Birds</a></li>
-          <li><a routerLink="/items/category4">Motor Vehicles</a></li>
-          <li><a routerLink="/items/category5">Home Decor</a></li>
-          <li><a routerLink="/items/category6">Fine Arts</a></li>
-          <li><a routerLink="/items/category7">View All Auctions</a></li>
-        </ul>
-      </li> -->
-
-      <!-- <li><a routerLink="/guides" routerLinkActive="active">Buying Guides & Tips</a></li> -->
     </ul>
 
     <div class="navbar-buttons">
       <!-- Display if user is registered -->
       <ng-container *ngIf="isRegistered">
         <ng-container *ngIf="isRegistered && !isAdmin">
+          <button class="sell-btn" routerLink="/addAuction">Sell on <span class="gavel">T</span>OPGAVEL</button>
+        </ng-container>
 
-        <button class="sell-btn" routerLink="/addAuction">Sell on <span class="gavel">T</span>OPGAVEL</button>
-      </ng-container>
+        <div class="notification-bell" (click)="toggleNotificationDropdown($event)"> 
+          <span class="notification-count" *ngIf="notificationCount > 0">{{ notificationCount }}</span>
 
-        <a href="/notifications"><i class="fa-solid fa-bell bell"></i></a>
+          <i class="fa-solid fa-bell bell"></i>
+
+          <div class="notification-dropdown" *ngIf="showNotificationDropdown">
+            <h4>Notifications</h4>
+            <div *ngFor="let notification of notifications" class="notification-item" (click)="removeNotification(notification.data.auction_id)">
+              <a [routerLink]="['/auction', notification.data.auction_id]">
+                <p>{{ notification.data.message }}</p>
+              </a>
+              <hr>
+            </div>
+            <button (click)="clearNotifications()">Clear Notifications</button>
+          </div>
+        </div>
 
         <!-- User profile with dropdown -->
         <div class="user-profile" (click)="toggleDropdown($event)">
@@ -47,17 +43,13 @@
           <i class="fa fa-caret-down"></i>
 
           <ul *ngIf="showDropdown" class="dropdown-menu user-dropdown">
-            <!-- <li><a routerLink="/profile">Profile</a></li> -->
-            <!-- <li><a routerLink="/settings">Settings</a></li> -->
-
-            <div *ngIf="isAdmin ; else noAuctions">
+            <div *ngIf="isAdmin; else noAuctions">
               <li><a routerLink="/adminDashboard">Dashboard</a></li>
             </div>
             <ng-template #noAuctions>
               <li><a routerLink="/userDashboard">Dashboard</a></li>
             </ng-template>
-            <li><a routerLink="/profile">profile</a></li>
-
+            <li><a routerLink="/profile">Profile</a></li>
             <li><a (click)="logout()">Logout</a></li>
           </ul>
         </div>

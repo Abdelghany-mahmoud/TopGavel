@@ -41,7 +41,11 @@ import { CustomersComponent } from './components/customers/customers.component';
     CustomersComponent
   ],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']  
+  styleUrls: ['./app.component.css']  ,
+  template: `
+  <app-header></app-header>
+  <router-outlet></router-outlet>
+`,
 })
 export class AppComponent implements OnInit {
   showHeader: boolean = true;
