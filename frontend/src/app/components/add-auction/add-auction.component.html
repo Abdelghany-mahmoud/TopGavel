@@ -4,7 +4,10 @@
     Join the Auction Revolution, Showcase Your Exceptional Items and Connect with Enthusiastic Bidders
   </h2>
 </div>
-<form [formGroup]="auctionForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+<div *ngIf="isBanned" class="banned-message">
+  <p>You can't edit an auction,You are banned.</p>
+</div>
+<form *ngIf="!isBanned" [formGroup]="auctionForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
   <label for="category_id">Category</label>
   <!-- <input id="category_id" formControlName="category_id" type="number" required value="3" >   -->
   <select id="category_id" formControlName="category_id" required>
@@ -63,7 +66,7 @@
   </div>
 
   <div *ngIf="auctionForm.hasError('endTimeBeforeStartTime', 'auction_end_time')">
-    <small class="error">The auction end time must be after the auction start time.</small>
+    <small class="error">The auction end time must be at least after 1hr from the auction start time.</small>
   </div>
 
   <label for="item_media">Item Media</label>

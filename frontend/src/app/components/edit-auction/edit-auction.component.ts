@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule, A
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuctionService } from '../../services/auction.service';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service'; 
 
 @Component({
   selector: 'app-edit-auction',
@@ -19,12 +20,17 @@ export class EditAuctionComponent implements OnInit {
   auction: any;
   images: string[] = [];
   loading = false;
+  isBanned: boolean = false;
+  isRegistered: boolean = false;
+  userName: string = '';
+  isAdmin: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private auctionService: AuctionService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthService
   ) {
     this.auctionForm = this.fb.group({
       category_id: ['', Validators.required],
@@ -80,6 +86,15 @@ export class EditAuctionComponent implements OnInit {
         console.error('Error fetching auction details', error);
       }
     });
+    const userData = this.authService.getUserData();
+    
+    if (userData) {
+      this.userName = userData.name; 
+      this.isRegistered = true;  
+      this.isAdmin = this.authService.is_admin();
+      this.isBanned = this.authService.isUserBanned();
+    }
+    
   }
 
   onFileChange(event: any) {

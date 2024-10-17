@@ -209,3 +209,10 @@ button:hover:not(:disabled) {
       transform: scaleY(1);
     }
   }
+  .banned-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px; 
+    text-align: center;
+    background-color: rgb(156, 87, 87);
+}

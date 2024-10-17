@@ -1,8 +1,10 @@
 <div class="hero-title">
   <h2 class=" container form-title">Edit Auction</h2>
 </div>
-
-<form [formGroup]="auctionForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+<div *ngIf="isBanned" class="banned-message">
+  <p>Youc can't edit auctions, You are banned.</p>
+</div>
+<form *ngIf="!isBanned" [formGroup]="auctionForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
   <label for="category_id">Category</label>
   <select id="category_id" formControlName="category_id" required>
     <option *ngFor="let category of categories" [value]="category.id">

@@ -18,8 +18,12 @@ export class AddAuctionComponent implements OnInit {
   categories: any[] = [];
   loading = false;
   serverErrorMessage: string = '';
-  
-  constructor(private fb: FormBuilder, private auctionService: AuctionService, private router: Router) {
+  isBanned: boolean = false;
+  isRegistered: boolean = false;
+  userName: string = '';
+  isAdmin: boolean = false;
+
+  constructor(private fb: FormBuilder, private auctionService: AuctionService, private router: Router, private authService: AuthService) {
   
     this.auctionForm = this.fb.group({
       category_id: ['', Validators.required],
@@ -44,6 +48,15 @@ export class AddAuctionComponent implements OnInit {
         console.error('Error fetching categories', error);
       }
     });
+    const userData = this.authService.getUserData();
+    
+    if (userData) {
+      this.userName = userData.name; 
+      this.isRegistered = true;  
+      this.isAdmin = this.authService.is_admin();
+      this.isBanned = this.authService.isUserBanned();
+    }
+    
   }
 
   // Validator to ensure end time is after start time
